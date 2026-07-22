@@ -4,7 +4,7 @@ provider "aws" {
     tags = {
       Project     = var.project_name
       Environment = var.environment
-      ManagedBy   = "Terraform"
+      ManagedBy   = "Akash Chaudhari"
       Owner       = "Akash Chaudhari"
       Assignment  = "CloudOps"
     }

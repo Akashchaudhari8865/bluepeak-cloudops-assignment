@@ -95,7 +95,6 @@ module "rds" {
 
   db_name     = var.db_name
   db_username = var.db_username
-  db_password = var.db_password
 
   private_db_subnet_ids = module.networking.private_db_subnet_ids
 

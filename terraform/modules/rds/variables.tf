@@ -26,12 +26,6 @@ variable "db_username" {
   type        = string
 }
 
-variable "db_password" {
-  description = "Master password"
-  type        = string
-  sensitive   = true
-}
-
 #############################################
 # Networking
 #############################################
@@ -101,11 +95,6 @@ variable "publicly_accessible" {
   default     = false
 }
 
-variable "storage_encrypted" {
-  description = "Enable storage encryption"
-  type        = bool
-  default     = true
-}
 
 variable "backup_retention_period" {
   description = "Number of backup retention days"

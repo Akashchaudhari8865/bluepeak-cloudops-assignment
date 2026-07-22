@@ -58,3 +58,9 @@ output "rds_endpoint" {
   value       = module.rds.db_endpoint
   sensitive   = true
 }
+
+output "rds_secret_arn" {
+  description = "Secrets Manager ARN"
+
+  value = module.rds.master_user_secret_arn
+}

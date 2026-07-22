@@ -63,3 +63,9 @@ output "db_subnet_group_name" {
   description = "DB Subnet Group Name"
   value       = aws_db_subnet_group.main.name
 }
+
+output "master_user_secret_arn" {
+  description = "Secrets Manager ARN"
+
+  value = aws_db_instance.main.master_user_secret[0].secret_arn
+}
