@@ -80,3 +80,9 @@ variable "instance_warmup" {
   type        = number
   default     = 300
 }
+
+variable "cpu_target_value" {
+  description = "Target average CPU utilization (%) the scaling policy tries to maintain across the ASG"
+  type        = number
+  default     = 60
+}

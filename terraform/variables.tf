@@ -95,3 +95,9 @@ variable "max_size" {
   description = "Maximum EC2 Instances"
   type        = number
 }
+
+variable "multi_az" {
+  description = "Enable Multi-AZ deployment for the RDS instance to provide high availability and automatic failover."
+  type        = bool
+  default     = false
+}

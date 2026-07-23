@@ -251,15 +251,28 @@ resource "aws_route_table_association" "private_app_2" {
 }
 
 #############################################
+# Private Database Route Table (isolated - no
+# default route to NAT/Internet at all, only
+# the implicit local VPC route)
+#############################################
+
+resource "aws_route_table" "private_db" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    Name = "${var.project_name}-${var.environment}-private-db-rt"
+  }
+}
+
+#############################################
 # Private Database Route Table Associations
 #############################################
 
 resource "aws_route_table_association" "private_db_1" {
   subnet_id      = aws_subnet.private_db_1.id
-  route_table_id = aws_route_table.private.id
+  route_table_id = aws_route_table.private_db.id
 }
 
 resource "aws_route_table_association" "private_db_2" {
   subnet_id      = aws_subnet.private_db_2.id
-  route_table_id = aws_route_table.private.id
+  route_table_id = aws_route_table.private_db.id
 }

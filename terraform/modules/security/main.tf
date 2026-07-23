@@ -53,15 +53,10 @@ resource "aws_security_group" "ec2" {
     ]
   }
 
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"
-    ]
-  }
+  # No SSH ingress: the EC2 instance role already grants SSM Session Manager
+  # access (see modules/ec2/main.tf, AmazonSSMManagedInstanceCore), so no
+  # inbound port needs to be open for shell access, and every session is
+  # logged in CloudTrail.
 
   egress {
     from_port = 0

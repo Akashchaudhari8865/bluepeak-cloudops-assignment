@@ -97,6 +97,7 @@ module "rds" {
   db_username = var.db_username
 
   private_db_subnet_ids = module.networking.private_db_subnet_ids
-
   db_security_group_id = module.security.rds_security_group_id
+
+  multi_az = var.multi_az
 }

@@ -107,3 +107,9 @@ variable "skip_final_snapshot" {
   type        = bool
   default     = true
 }
+
+variable "multi_az" {
+  description = "Enable Multi-AZ deployment for the RDS instance to provide high availability and automatic failover."
+  type        = bool
+  default     = false
+}

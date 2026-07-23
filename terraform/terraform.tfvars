@@ -57,3 +57,8 @@ max_size = 4
 db_name = "counterdb"
 
 db_username = "admin"
+
+
+# Set to true in production for high availability.
+# Disabled in the dev environment to reduce cost.
+multi_az = false
