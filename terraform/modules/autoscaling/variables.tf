@@ -86,3 +86,8 @@ variable "cpu_target_value" {
   type        = number
   default     = 60
 }
+
+variable "launch_template_version" {
+  description = "Launch template version"
+  type        = string
+}

@@ -55,6 +55,35 @@ resource "aws_iam_role_policy_attachment" "ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+
+#############################################
+# Allow EC2 to Download Application from S3
+#############################################
+
+resource "aws_iam_role_policy" "artifact_bucket_access" {
+  name = "${var.project_name}-${var.environment}-artifact-access"
+  role = aws_iam_role.ec2.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject"
+        ]
+        Resource = "arn:aws:s3:::${var.artifact_bucket_name}/${var.artifact_object_key}"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket"
+        ]
+        Resource = "arn:aws:s3:::${var.artifact_bucket_name}"
+      }
+    ]
+  })
+}
+
 #############################################
 # IAM Instance Profile
 #############################################
@@ -62,6 +91,10 @@ resource "aws_iam_role_policy_attachment" "ssm" {
 resource "aws_iam_instance_profile" "ec2" {
   name = "${var.project_name}-${var.environment}-instance-profile"
   role = aws_iam_role.ec2.name
+  depends_on = [
+    aws_iam_role_policy_attachment.ssm,
+    aws_iam_role_policy.artifact_bucket_access
+  ]
   tags = {
     Name = "${var.project_name}-${var.environment}-instance-profile"
   }
@@ -72,6 +105,10 @@ resource "aws_iam_instance_profile" "ec2" {
 #############################################
 
 resource "aws_launch_template" "main" {
+  depends_on = [
+  aws_iam_instance_profile.ec2,
+  aws_iam_role_policy.artifact_bucket_access
+]
   name_prefix   = "${var.project_name}-${var.environment}-lt-"
   image_id      = data.aws_ami.amazon_linux.id
   instance_type = var.instance_type
@@ -113,7 +150,9 @@ resource "aws_launch_template" "main" {
     templatefile(
       "${path.module}/userdata.sh.tpl",
       {
-        app_name = var.app_name
+        app_name            = var.app_name
+        artifact_bucket     = var.artifact_bucket_name
+        artifact_object_key = var.artifact_object_key
       }
     )
   )
@@ -160,6 +199,7 @@ resource "aws_launch_template" "main" {
     }
   }
   tags = {
-    Name = "${var.project_name}-${var.environment}-launch-template"
+  Name       = "${var.project_name}-${var.environment}-launch-template"
+  AppVersion = var.app_version
   }
 }

@@ -57,7 +57,7 @@ variable "key_name" {
 variable "root_volume_size" {
   description = "Root EBS volume size (GB)"
   type        = number
-  default     = 8
+  default     = 30
 }
 
 variable "root_volume_type" {
@@ -84,4 +84,21 @@ variable "app_name" {
   description = "Application name"
   type        = string
   default     = "counter-app"
+}
+
+
+variable "artifact_bucket_name" {
+  description = "S3 bucket containing application artifacts"
+  type        = string
+}
+
+variable "artifact_object_key" {
+  description = "S3 object key for the application zip"
+  type        = string
+  default     = "application.zip"
+}
+
+variable "app_version" {
+  description = "Application version/hash used to trigger Launch Template updates"
+  type        = string
 }
