@@ -14,16 +14,20 @@ resource "aws_autoscaling_group" "main" {
     var.target_group_arn
   ]
   launch_template {
-    id      = var.launch_template_id
-    version = "$Latest"
+  id      = var.launch_template_id
+  version = var.launch_template_version
   }
   instance_refresh {
-    strategy = "Rolling"
-    preferences {
-      min_healthy_percentage = 50
-      instance_warmup        = var.instance_warmup
-      skip_matching          = true
-    }
+  strategy = "Rolling"
+
+  triggers = [
+    "launch_template"
+  ]
+
+  preferences {
+    min_healthy_percentage = 50
+    instance_warmup        = var.instance_warmup
+  }
   }
   tag {
     key                 = "Name"
