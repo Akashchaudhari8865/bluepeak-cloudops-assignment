@@ -83,12 +83,6 @@ variable "storage_type" {
   default     = "gp3"
 }
 
-variable "multi_az" {
-  description = "Enable Multi-AZ deployment"
-  type        = bool
-  default     = false
-}
-
 variable "publicly_accessible" {
   description = "Whether the database is publicly accessible"
   type        = bool
