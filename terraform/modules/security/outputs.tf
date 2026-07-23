@@ -1,0 +1,26 @@
+#############################################
+# ALB Security Group
+#############################################
+
+output "alb_security_group_id" {
+  description = "ALB Security Group ID"
+  value       = aws_security_group.alb.id
+}
+
+#############################################
+# EC2 Security Group
+#############################################
+
+output "ec2_security_group_id" {
+  description = "EC2 Security Group ID"
+  value       = aws_security_group.ec2.id
+}
+
+#############################################
+# RDS Security Group
+#############################################
+
+output "rds_security_group_id" {
+  description = "RDS Security Group ID"
+  value       = aws_security_group.rds.id
+}
