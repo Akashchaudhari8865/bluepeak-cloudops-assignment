@@ -1,9 +1,4 @@
-# bluepeak-cloudops-assignment
-Repository created for assignment purpose
-
 # Deployment & Execution Guide
-
-## BluePeak Technologies Cloud Migration using AWS & Terraform
 
 **Author:** Akash Chaudhari  
 **Cloud Provider:** Amazon Web Services (AWS)  
@@ -16,7 +11,7 @@ Repository created for assignment purpose
 1. Overview
 2. Prerequisites
 3. Repository Structure
-4. Bootstrap Backend Deployment
+4. S3 Backend Bootstrap Deployment
 5. Configure Remote Backend
 6. Terraform Infrastructure Deployment
 7. Application Deployment
@@ -24,8 +19,7 @@ Repository created for assignment purpose
 9. Updating the Application
 10. Terraform Outputs
 11. Destroy Procedure
-12. Troubleshooting
-13. Conclusion
+12. Conclusion
 
 ---
 
@@ -35,10 +29,10 @@ This guide provides step-by-step instructions for deploying the complete AWS inf
 
 The deployment is divided into two phases:
 
-1. Bootstrap Terraform Backend
+1. s3 Bootstrap Terraform Backend
 2. Deploy Infrastructure and Application
 
-This approach ensures that Terraform state is securely stored in Amazon S3 with state locking provided by DynamoDB.
+This approach ensures that the Terraform state is securely stored in Amazon S3, while state locking is handled using Terraform's native S3 locking mechanism by enabling **use_lockfile = true**. This prevents multiple users from modifying the same state file simultaneously and helps avoid state corruption.
 
 ---
 
@@ -79,13 +73,10 @@ aws sts get-caller-identity
 
 ```text
 bluepeak-cloudops-assignment/
+
+├── app/                # Counter application source code
 │
-├── bootstrap/
-│   ├── backend.tf
-│   ├── provider.tf
-│   ├── main.tf
-│   ├── variables.tf
-│   └── outputs.tf
+├── s3-backend-bootstrap/                  # Terraform backend (S3)
 │
 ├── terraform/
 │   ├── modules/
@@ -103,15 +94,14 @@ bluepeak-cloudops-assignment/
 │   ├── outputs.tf
 │   └── main.tf
 │
-├── application/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│   └── Dockerfile
-│
 ├── docs/
-├── README.md
-└── LICENSE
+│   ├── Technical_Design_Document.md
+│   ├── Deployment_Guide.md
+│   ├── Architecture_Diagram.drawio
+│   ├── Architecture_Diagram.pdf
+│   └── Architecture_Diagram.png
+│
+└── README.md
 ```
 
 ---
@@ -362,14 +352,6 @@ Examples:
 - script.js
 
 ### Step 2
-
-Create a new ZIP archive.
-
-```bash
-zip -r application.zip application/
-```
-
-### Step 3
 
 Run Terraform.
 
