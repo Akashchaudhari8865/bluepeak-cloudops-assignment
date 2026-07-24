@@ -129,11 +129,11 @@ bluepeak-cloudops-assignment/
 │   └── main.tf
 │
 ├── docs/
-│   ├── Technical_Design_Document.md
+│   ├── Technical_Design_Document.pdf
 │   ├── Deployment_Guide.md
-│   ├── Architecture_Diagram.drawio
-│   ├── Architecture_Diagram.pdf
-│   └── Architecture_Diagram.png
+│   ├── CloudOpsAssignment-Architecture.drawio
+│   ├── CloudOpsAssignment-Architecture.drawio.svg
+│   └── CloudOpsAssignment-Architecture.drawio.png
 │
 └── README.md
 ```
