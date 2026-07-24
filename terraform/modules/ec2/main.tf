@@ -147,14 +147,12 @@ resource "aws_launch_template" "main" {
   #############################################
 
   user_data = base64encode(
-    templatefile(
-      "${path.module}/userdata.sh.tpl",
-      {
-        app_name            = var.app_name
-        artifact_bucket     = var.artifact_bucket_name
-        artifact_object_key = var.artifact_object_key
-      }
-    )
+    templatefile("${path.module}/userdata.sh.tpl", {
+      app_name            = var.app_name
+      artifact_bucket     = var.artifact_bucket_name
+      artifact_object_key = var.artifact_object_key
+      app_version         = var.app_version
+    })
   )
 
   #############################################
