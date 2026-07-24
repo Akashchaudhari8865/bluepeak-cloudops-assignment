@@ -108,9 +108,9 @@ A detailed architecture diagram is also available in:
 ```text
 bluepeak-cloudops-assignment/
 
-├── application/                # Counter application source code
+├── app/                # Counter application source code
 │
-├── bootstrap/                  # Terraform backend (S3)
+├── s3-backend-bootstrap/                  # Terraform backend (S3)
 │
 ├── terraform/
 │   ├── modules/
@@ -429,5 +429,4 @@ Additional documentation is available in the **docs** folder.
 # Author
 
 **Akash Chaudhari**
-
-CloudOps Engineer Assignment
+github@akashchaudhari8865
