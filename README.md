@@ -23,8 +23,8 @@ The infrastructure follows AWS Well-Architected best practices with a focus on s
 
 A detailed architecture diagram is also available in:
 
-- `docs/Architecture_Diagram.drawio`
-- `docs/Architecture_Diagram.svg`
+- `docs/CloudOpsAssignment-Architecture.drawio.svg`
+- `docs/CloudOpsAssignment-Architecture.drawio.png`
 
 ---
 
