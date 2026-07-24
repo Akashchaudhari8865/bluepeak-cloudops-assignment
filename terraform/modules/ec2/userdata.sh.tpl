@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euxo pipefail
 
+APP_VERSION="${app_version}"
+
+echo "Deploying version ${app_version}"
+
 exec > >(tee /var/log/user-data.log)
 exec 2>&1
 
