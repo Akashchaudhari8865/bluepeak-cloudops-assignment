@@ -242,12 +242,6 @@ Terraform provisions the following resources:
 
 The application is packaged as a ZIP archive.
 
-Create the application archive.
-
-```bash
-zip -r application.zip application/
-```
-
 Terraform uploads the archive to the Amazon S3 artifact bucket.
 
 When an EC2 instance launches, the User Data script automatically:
